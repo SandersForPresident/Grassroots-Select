@@ -58,7 +58,7 @@ function custom_taxonomies() {
 
   register_taxonomy('party', 'candidate', array(
     'labels' => array(
-      'name' => 'Political Party',
+      'name' => 'Political Parties',
       'singular_name' => 'Political Party'
     ),
     'public' => true,
