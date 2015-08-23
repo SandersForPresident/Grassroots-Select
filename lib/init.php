@@ -13,12 +13,11 @@ function custom_post_types() {
     )
   );
 
-  register_post_type('states',
+  register_post_type('district',
     array(
       'labels' => array(
-        'name' => 'States',
-        'singular_name' => 'State',
-        'edit' => 'Edit'
+        'name' => 'Districts',
+        'singular_name' => 'Districts'
       ),
       'hierarchical' => true,
       'supports' => array('title', 'page-attributes'),
