@@ -23,6 +23,9 @@ function custom_post_types() {
       'supports' => array('title', 'page-attributes'),
       'public' => true,
       'has_archive' => true,
+      'rewrite' => array(
+        'with_front' => true
+      )
     )
   );
 }
@@ -42,6 +45,21 @@ function custom_taxonomies() {
       'add_new_item' => 'Add New State',
       'new_item_name' => 'New State',
       'menu_name' => 'States'
+    ),
+    'public' => true,
+    'show_admin_column' => true,
+    'hierarchical' => true,
+    'query_var' => true,
+    'rewrite' => array(
+      'hierarchical' => true,
+      'with_front' => true
+    )
+  ));
+
+  register_taxonomy('party', 'candidate', array(
+    'labels' => array(
+      'name' => 'Political Party',
+      'singular_name' => 'Political Party'
     ),
     'public' => true,
     'show_admin_column' => true,
