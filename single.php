@@ -1,3 +1,3 @@
 <?php get_header(); ?>
-index
+single
 <?php get_footer(); ?>

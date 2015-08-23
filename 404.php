@@ -1,3 +1,3 @@
 <?php get_header(); ?>
-index
+not found
 <?php get_footer(); ?>

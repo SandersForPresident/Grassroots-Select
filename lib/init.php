@@ -22,9 +22,10 @@ function custom_post_types() {
       'hierarchical' => true,
       'supports' => array('title', 'page-attributes'),
       'public' => true,
-      'has_archive' => true,
+      'has_archive' => 'states',
       'rewrite' => array(
-        'with_front' => true
+        'with_front' => false,
+        'slug' => 'states/%show_category%'
       )
     )
   );
@@ -51,8 +52,9 @@ function custom_taxonomies() {
     'hierarchical' => true,
     'query_var' => true,
     'rewrite' => array(
-      'hierarchical' => true,
-      'with_front' => true
+      'slug' => 'states',
+      // 'hierarchical' => true,
+      'with_front' => false
     )
   ));
 
@@ -67,3 +69,16 @@ function custom_taxonomies() {
   ));
 }
 add_action('init', __NAMESPACE__ . '\\custom_taxonomies');
+
+function show_permalinks($post_link, $id=0) {
+  $post = get_post($id);
+
+  if (is_object($post) && $post->post_type == 'district') {
+    $terms = wp_get_object_terms($post->ID, 'state');
+    if ($terms) {
+      return str_replace('%show_category%', $terms[0]->slug, $post_link);
+    }
+  }
+  return $post_link;
+}
+add_filter('post_type_link', __NAMESPACE__ . '\\show_permalinks', 1, 2);
