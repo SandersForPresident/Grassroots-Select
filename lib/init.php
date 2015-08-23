@@ -56,7 +56,7 @@ function custom_taxonomies() {
     )
   ));
 
-  register_taxonomy('party', 'candidate', array(
+  register_taxonomy('party', array('candidate', 'district'), array(
     'labels' => array(
       'name' => 'Political Parties',
       'singular_name' => 'Political Party'
