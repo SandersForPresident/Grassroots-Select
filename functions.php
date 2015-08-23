@@ -1,7 +1,8 @@
 <?php
 
 $includes = array(
-  'lib/init.php'
+  'lib/init.php',
+  'lib/tables.php'
 );
 foreach ($includes as $file) {
   if (!$filepath = locate_template($file)) {
