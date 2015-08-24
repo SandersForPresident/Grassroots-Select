@@ -16,7 +16,7 @@ function restrict_listings_by_taxonomy() {
         'orderby' => 'term_order',
         'selected' => $_GET[$tax_obj->query_var],
         'hierarchical' => $tax_obj->hierarchical,
-        'show_count' => true,
+        'show_count' => false,
         'hide_empty' => false
       ));
     }
