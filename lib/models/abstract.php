@@ -3,12 +3,17 @@ namespace GrassrootsSelect\Models;
 
 class AbstractModel {
   public $post;
+  public $featuredImage;
 
   public function __construct($post) {
     if (is_object($post)) {
       $this->post = $post;
     } else {
       $this->post = get_post($post);
+    }
+
+    if (has_post_thumbnail($this->post->ID)) {
+      $this->featuredImage = wp_get_attachment_image_src(get_post_thumbnail_id($this->post->ID));
     }
   }
 
