@@ -13,7 +13,8 @@ class AbstractModel {
     }
 
     if (has_post_thumbnail($this->post->ID)) {
-      $this->featuredImage = wp_get_attachment_image_src(get_post_thumbnail_id($this->post->ID));
+      $image = wp_get_attachment_image_src(get_post_thumbnail_id($this->post->ID));
+      $this->featuredImage = $image[0];
     }
   }
 

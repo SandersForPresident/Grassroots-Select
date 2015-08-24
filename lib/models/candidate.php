@@ -2,6 +2,8 @@
 namespace GrassrootsSelect\Models;
 
 class CandidateModel extends AbstractModel {
+  use Traits\PoliticalParty;
+
   public $party;
 
   public function __construct($post) {
