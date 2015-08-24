@@ -5,7 +5,8 @@
 
 <?php
   wp_list_categories(array(
-    'taxonomy' => 'state'
+    'taxonomy' => 'state',
+    'hide_empty' => false
   ));
 ?>
 
