@@ -1,6 +1,8 @@
 <?php
 namespace GrassrootsSelect\Init;
 
+add_theme_support('post-thumbnails');
+
 function rewrite_rules($rules) {
   $newRules = array();
   $newRules['states/(.+)/(.+?)$'] = 'index.php?district=$matches[2]';
@@ -15,6 +17,7 @@ function custom_post_types() {
         'name' => 'Candidates',
         'singular_name' => 'Candidate',
       ),
+      'supports' => array('title', 'thumbnail'),
       'public' => true,
       'has_archive' => true,
     )
