@@ -24,11 +24,7 @@
   <h3>Candidates:</h3>
   <ul>
     <?php foreach($district->candidates as $candidate): ?>
-      <li>
-        <pre>
-          <?php print_r($candidate); ?>
-        </pre>
-      </li>
+      <li><?php echo $candidate->getTitle(); ?></li>
     <?php endforeach; ?>
   </ul>
 

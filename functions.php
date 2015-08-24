@@ -5,7 +5,8 @@ $includes = array(
   'lib/tables.php',
   'lib/taxonomy_dropdown_metabox.php',
   'lib/models/abstract.php',
-  'lib/models/district.php'
+  'lib/models/district.php',
+  'lib/models/candidate.php'
 );
 foreach ($includes as $file) {
   if (!$filepath = locate_template($file)) {
