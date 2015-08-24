@@ -1,7 +1,7 @@
 <?php
 namespace GrassrootsSelect\Models;
 
-class District {
+class DistrictModel extends AbstractModel {
   public $post;
   public $number;
   public $pvi;
@@ -9,11 +9,7 @@ class District {
   public $state;
 
   public function __construct($post) {
-    if (is_object($post)) {
-      $this->post = $post;
-    } else {
-      $this->post = get_post($post);
-    }
+    parent::__construct($post);
 
     $this->number = get_field('district_number', $this->post->ID);
     $this->pvi = get_field('pvi', $this->post->ID);
@@ -24,5 +20,9 @@ class District {
 
     $stateTerms = wp_get_post_terms($this->post->ID, 'state');
     $this->state = $stateTerms[0];
+  }
+
+  public function getPermalink() {
+    return get_permalink($this->post->ID);
   }
 }

@@ -4,6 +4,7 @@ $includes = array(
   'lib/init.php',
   'lib/tables.php',
   'lib/taxonomy_dropdown_metabox.php',
+  'lib/models/abstract.php',
   'lib/models/district.php'
 );
 foreach ($includes as $file) {
