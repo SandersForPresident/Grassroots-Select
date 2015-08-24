@@ -1,6 +1,13 @@
 <?php
 namespace GrassrootsSelect\Init;
 
+function rewrite_rules($rules) {
+  $newRules = array();
+  $newRules['states/(.+)/(.+?)$'] = 'index.php?district=$matches[2]';
+  return array_merge($newRules, $rules);
+}
+add_filter('rewrite_rules_array', __NAMESPACE__ . '\\rewrite_rules');
+
 function custom_post_types() {
   register_post_type('candidate',
     array(
@@ -22,7 +29,8 @@ function custom_post_types() {
       'hierarchical' => true,
       'supports' => array('title', 'page-attributes'),
       'public' => true,
-      'has_archive' => 'states',
+      // 'has_archive' => 'states',
+      'has_archive' => true,
       'rewrite' => array(
         'with_front' => false,
         'slug' => 'states/%show_category%'
