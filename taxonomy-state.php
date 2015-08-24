@@ -22,11 +22,15 @@
   <h3>Party: <?php echo $district->party->name; ?></h3>
   <h3>PVI: <?php echo $district->pvi; ?></h3>
   <h3>Candidates:</h3>
-  <ul>
+  <div>
     <?php foreach($district->candidates as $candidate): ?>
-      <li><?php echo $candidate->getTitle(); ?></li>
+      <div
+        style="padding: 10px; margin: 20px; display: inline-block; margin: 20px; background-color:<?php if ($candidate->isDemocrat()) {echo 'blue';} ?> <?php if ($candidate->isRepublican()) {echo 'red';} ?>;">
+        <h3><?php echo $candidate->getTitle(); ?></h3>
+          <img src="<?php echo $candidate->featuredImage ?: 'http://placehold.it/100x100' ?>" style="width: 100px;" />
+      </div>
     <?php endforeach; ?>
-  </ul>
+  </div>
 
 
 </div>
