@@ -1,13 +1,17 @@
 <?php
   /* Template Name: States */
   get_header();
-?>
-
-<?php
-  wp_list_categories(array(
-    'taxonomy' => 'state',
+  $taxonomyTerms = get_terms('state', array(
+    'orderby' => 'name',
+    'order' => 'asc',
     'hide_empty' => false
   ));
 ?>
+
+<?php foreach ($taxonomyTerms as $term): ?>
+  <div>
+    <h2><a href="<?php echo get_term_link($term); ?>"><?php echo $term->name; ?></a></h2>
+  </div>
+<?php endforeach; ?>
 
 <?php get_footer(); ?>
