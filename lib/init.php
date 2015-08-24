@@ -43,7 +43,7 @@ add_action('init', __NAMESPACE__ . '\\custom_post_types');
 function custom_taxonomies() {
   register_taxonomy('state', 'district', array(
     'labels' => array(
-      'name' => 'States',
+      'name' => 'State',
       'singular_name' => 'State',
       'search_items' => 'Search States',
       'all_items' => 'All States',
@@ -59,21 +59,22 @@ function custom_taxonomies() {
     'show_admin_column' => true,
     'hierarchical' => true,
     'query_var' => true,
+    'meta_box_cb' => 'GrassrootsSelect\\TaxonomyDropdownMetabox\\dropdown_metabox',
     'rewrite' => array(
       'slug' => 'states',
-      // 'hierarchical' => true,
       'with_front' => false
     )
   ));
 
   register_taxonomy('party', array('candidate', 'district'), array(
     'labels' => array(
-      'name' => 'Political Parties',
+      'name' => 'Political Party',
       'singular_name' => 'Political Party'
     ),
     'public' => true,
     'show_admin_column' => true,
-    'hierarchical' => true
+    'hierarchical' => true,
+    'meta_box_cb' => 'GrassrootsSelect\\TaxonomyDropdownMetabox\\dropdown_metabox'
   ));
 }
 add_action('init', __NAMESPACE__ . '\\custom_taxonomies');
