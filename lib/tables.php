@@ -55,12 +55,15 @@ function candidate_custom_column_content ($column, $postID) {
     $service = new Service();
     $district = $service->getDistrictByCandidate($postID);
     if (!empty($district)) {
-      echo "<a href=\"?post_type={$_REQUEST['post_type']}&state_district={$district->post->ID}\">";
-      if (!empty($district->state)) {
-        echo $district->state->name . ' - ';
-      }
+
+      echo "<a href=\"?post_type={$_REQUEST['post_type']}&district_id={$district->post->ID}\">";
       echo $district->getTitle();
       echo "</a>";
+      if (!empty($district->state)) {
+        echo ", <a href=\"?post_type={$_REQUEST['post_type']}&state_id={$district->state->term_id}\">";
+        echo $district->state->name;
+        echo "</a>";
+      }
     } else {
       echo '--';
     }
@@ -69,10 +72,15 @@ function candidate_custom_column_content ($column, $postID) {
 
 function candidate_district_query_filter ($join) {
   global $wp_query, $wpdb;
-  if (is_admin() && $wp_query->query['post_type'] == 'candidate' && !empty($_GET['state_district'] && intval($_GET['state_district']))) {
-    $districtID = intval($_GET['state_district']);
+  if (is_admin() && $wp_query->query['post_type'] == 'candidate' && !empty($_GET['district_id'] && intval($_GET['district_id']))) {
+    $districtID = intval($_GET['district_id']);
     $join .= "JOIN {$wpdb->postmeta} DPM ON DPM.meta_value LIKE CONCAT('%\"', $wpdb->posts.ID, '\"%') AND DPM.meta_key = 'candidates' ";
     $join .= "AND DPM.post_id = {$districtID}";
+  } else if (is_admin() && $wp_query->query['post_type'] == 'candidate' && !empty($_GET['state_id'] && intval($_GET['state_id']))) {
+    $stateID = intval($_GET['state_id']);
+    $join .= "JOIN {$wpdb->postmeta} DPM ON DPM.meta_value LIKE CONCAT('%\"', $wpdb->posts.ID, '\"%') AND DPM.meta_key = 'candidates' ";
+    $join .= "JOIN {$wpdb->term_relationships} CDR ON CDR.object_id = DPM.post_id ";
+    $join .= "JOIN {$wpdb->term_taxonomy} ST ON ST.term_taxonomy_id = CDR.term_taxonomy_id AND ST.taxonomy = 'state' AND ST.term_id = '$stateID' ";
   }
   return $join;
 }
