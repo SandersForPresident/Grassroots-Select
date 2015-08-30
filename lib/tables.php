@@ -1,5 +1,6 @@
 <?php
 namespace GrassrootsSelect\Tables;
+use GrassrootsSelect\Service;
 
 function restrict_listings_by_taxonomy() {
   global $typenow;
@@ -39,3 +40,26 @@ function convert_taxonomy_id_to_taxonomy_term_in_query() {
   }
 }
 add_filter('parse_query', __NAMESPACE__ . '\\convert_taxonomy_id_to_taxonomy_term_in_query');
+
+function candidate_custom_column_headers ($defaults) {
+  $defaults['state'] = 'State';
+  return $defaults;
+}
+
+function candidate_custom_column_content ($column, $postID) {
+  if ($column == 'state') {
+    $service = new Service();
+    $district = $service->getDistrictByCandidate($postID);
+    if (!empty($district)) {
+      if (!empty($district->state)) {
+        echo $district->state->name . ' - ';
+      }
+      echo $district->getTitle();
+    } else {
+      echo '--';
+    }
+  }
+}
+
+add_filter('manage_posts_columns', __NAMESPACE__ . '\\candidate_custom_column_headers');
+add_action('manage_posts_custom_column', __NAMESPACE__ . '\\candidate_custom_column_content', 10, 2);
