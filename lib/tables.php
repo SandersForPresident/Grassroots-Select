@@ -41,9 +41,13 @@ function convert_taxonomy_id_to_taxonomy_term_in_query() {
 }
 add_filter('parse_query', __NAMESPACE__ . '\\convert_taxonomy_id_to_taxonomy_term_in_query');
 
-function candidate_custom_column_headers ($defaults) {
-  $defaults['state'] = 'State';
-  return $defaults;
+function candidate_custom_column_headers () {
+  $columns = array();
+  $columns['title'] = 'Title';
+  $columns['taxonomy-party'] = 'Political Party';
+  $columns['state'] = 'State / District';
+  $columns['date'] = 'Date';
+  return $columns;
 }
 
 function candidate_custom_column_content ($column, $postID) {
