@@ -55,15 +55,28 @@ function candidate_custom_column_content ($column, $postID) {
     $service = new Service();
     $district = $service->getDistrictByCandidate($postID);
     if (!empty($district)) {
+      echo "<a href=\"?post_type={$_REQUEST['post_type']}&state_district={$district->post->ID}\">";
       if (!empty($district->state)) {
         echo $district->state->name . ' - ';
       }
       echo $district->getTitle();
+      echo "</a>";
     } else {
       echo '--';
     }
   }
 }
 
+function candidate_district_query_filter ($join) {
+  global $wp_query, $wpdb;
+  if (is_admin() && $wp_query->query['post_type'] == 'candidate' && !empty($_GET['state_district'] && intval($_GET['state_district']))) {
+    $districtID = intval($_GET['state_district']);
+    $join .= "JOIN {$wpdb->postmeta} DPM ON DPM.meta_value LIKE CONCAT('%\"', $wpdb->posts.ID, '\"%') AND DPM.meta_key = 'candidates' ";
+    $join .= "AND DPM.post_id = {$districtID}";
+  }
+  return $join;
+}
+
 add_filter('manage_posts_columns', __NAMESPACE__ . '\\candidate_custom_column_headers');
 add_action('manage_posts_custom_column', __NAMESPACE__ . '\\candidate_custom_column_content', 10, 2);
+add_filter('posts_join', __NAMESPACE__ . '\\candidate_district_query_filter');
