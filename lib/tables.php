@@ -85,6 +85,26 @@ function candidate_district_query_filter ($join) {
   return $join;
 }
 
+function restrict_candidate_states () {
+  global $typenow;
+  $args = array('public' => true, '_builtin' => false);
+  $post_types = get_post_types($args);
+  if ($typenow == 'candidate') {
+    $tax_obj = get_taxonomy('state');
+    wp_dropdown_categories(array(
+      'show_option_all' => 'Show all States',
+      'taxonomy' => 'state',
+      'name' => 'state_id',
+      'orderby' => 'term_order',
+      'selected' => $_GET['state_id'],
+      'hierarchical' => $tax_obj->hierarchical,
+      'show_count' => false,
+      'hide_empty' => false
+    ));
+  }
+}
+
 add_filter('manage_posts_columns', __NAMESPACE__ . '\\candidate_custom_column_headers');
 add_action('manage_posts_custom_column', __NAMESPACE__ . '\\candidate_custom_column_content', 10, 2);
 add_filter('posts_join', __NAMESPACE__ . '\\candidate_district_query_filter');
+add_action('restrict_manage_posts', __NAMESPACE__ . '\\restrict_candidate_states');
