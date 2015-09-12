@@ -2,6 +2,7 @@
 
 namespace GrassrootsSelect;
 use GrassrootsSelect\Models\DistrictModel;
+use GrassrootsSelect\Models\BillModel;
 
 class Service {
 
@@ -41,5 +42,19 @@ class Service {
       }
     }
     return null;
+  }
+
+  public static function getBills () {
+    $bills = array();
+    $billPosts = get_posts(array(
+      'post_type' => 'bill',
+      'post_status' => 'publish'
+    ));
+
+    foreach ($billPosts as $billPost) {
+      $bills[] = new BillModel($billPost);
+    }
+
+    return $bills;
   }
 }

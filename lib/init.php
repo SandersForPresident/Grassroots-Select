@@ -20,6 +20,7 @@ function custom_post_types() {
       'supports' => array('title', 'editor', 'thumbnail'),
       'public' => true,
       'has_archive' => true,
+      'register_meta_box_cb' => 'GrassrootsSelect\\Admin\\CandidateBillsMetaBox\\registerMetaBox'
     )
   );
 
