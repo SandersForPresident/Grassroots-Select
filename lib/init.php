@@ -40,6 +40,17 @@ function custom_post_types() {
       )
     )
   );
+
+  register_post_type('bill',
+    array(
+      'labels' => array(
+        'name' => 'Bills',
+        'singular_name' => 'Bill'
+      ),
+      'supports' => array('title', 'editor'),
+      'public' => true
+    )
+  );
 }
 add_action('init', __NAMESPACE__ . '\\custom_post_types');
 
@@ -78,6 +89,26 @@ function custom_taxonomies() {
     'show_admin_column' => true,
     'hierarchical' => true,
     'meta_box_cb' => 'GrassrootsSelect\\TaxonomyDropdownMetabox\\dropdown_metabox'
+  ));
+
+  register_taxonomy('issue', 'bill', array(
+    'labels' => array(
+      'name' => 'Issues',
+      'singular_name' => 'Issue',
+      'search_items' => 'Search Issues',
+      'all_items' => 'All Issues',
+      'parent_item' => 'Parent Issue',
+      'parent_item_colon' => 'Parent Issue:',
+      'edit_item' => 'Edit Issue',
+      'update_item' => 'Update Issue',
+      'add_new_item' => 'Add New Issue',
+      'new_item_name' => 'New Issue',
+      'menu_name' => 'Issues'
+    ),
+    'public' => true,
+    'show_admin_column' => true,
+    'hierarchical' => true,
+    'query_var' => true
   ));
 }
 add_action('init', __NAMESPACE__ . '\\custom_taxonomies');
