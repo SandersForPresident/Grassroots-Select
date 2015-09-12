@@ -17,7 +17,7 @@ function custom_post_types() {
         'name' => 'Candidates',
         'singular_name' => 'Candidate',
       ),
-      'supports' => array('title', 'thumbnail'),
+      'supports' => array('title', 'editor', 'thumbnail'),
       'public' => true,
       'has_archive' => true,
     )
@@ -30,7 +30,7 @@ function custom_post_types() {
         'singular_name' => 'Districts'
       ),
       'hierarchical' => true,
-      'supports' => array('title', 'page-attributes'),
+      'supports' => array('title', 'editor'),
       'public' => true,
       // 'has_archive' => 'states',
       'has_archive' => true,
