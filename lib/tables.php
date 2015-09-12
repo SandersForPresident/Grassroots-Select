@@ -104,7 +104,7 @@ function restrict_candidate_states () {
   }
 }
 
-add_filter('manage_posts_columns', __NAMESPACE__ . '\\candidate_custom_column_headers');
+add_filter('manage_candidate_posts_columns', __NAMESPACE__ . '\\candidate_custom_column_headers');
 add_action('manage_posts_custom_column', __NAMESPACE__ . '\\candidate_custom_column_content', 10, 2);
 add_filter('posts_join', __NAMESPACE__ . '\\candidate_district_query_filter');
 add_action('restrict_manage_posts', __NAMESPACE__ . '\\restrict_candidate_states');

@@ -107,7 +107,6 @@ function custom_taxonomies() {
     ),
     'public' => true,
     'show_admin_column' => true,
-    'hierarchical' => true,
     'query_var' => true
   ));
 }
