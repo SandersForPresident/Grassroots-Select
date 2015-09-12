@@ -11,7 +11,7 @@ $includes = array(
   'lib/models/district.php',
   'lib/models/candidate.php',
   'lib/models/bill.php',
-  'lib/admin/candidate_bills_metabox.php'
+  'lib/admin/candidate/bills_metabox.php'
 );
 foreach ($includes as $file) {
   if (!$filepath = locate_template($file)) {
