@@ -1,3 +1,9 @@
+<?php
+function hasVoteForBill ($votingHistory, $bill) {
+  return !empty($votingHistory) && array_key_exists($bill->getID(), $votingHistory);
+}
+?>
+
 <table class="candidate_bill_voting_history">
   <thead>
     <tr>
@@ -13,13 +19,14 @@
       <td><?php echo $bill->getIssueTitle(); ?></td>
       <td>
         <select name="bill[<?php echo $bill->getID(); ?>]">
+          <option value="">--</option>
           <option
             value="1"
-            <?php if (!empty($votingHistory) && $votingHistory[$bill->getID()] == true): ?>selected<?php endif; ?>
+            <?php if (hasVoteForBill($votingHistory, $bill) && $votingHistory[$bill->getID()] == true): ?>selected<?php endif; ?>
             >Voted For</option>
           <option
             value="0"
-            <?php if (!empty($votingHistory) && $votingHistory[$bill->getID()] == false): ?>selected<?php endif; ?>
+            <?php if (hasVoteForBill($votingHistory, $bill) && $votingHistory[$bill->getID()] == false): ?>selected<?php endif; ?>
             >Voted Against</option>
         </select>
       </td>
