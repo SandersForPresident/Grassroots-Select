@@ -8,5 +8,6 @@ This is the theme for the Grassroots Select project
 ```
 npm install
 bower install
+composer install
 npm build
 ```
