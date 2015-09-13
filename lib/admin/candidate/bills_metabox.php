@@ -1,6 +1,6 @@
 <?php
 namespace GrassrootsSelect\Admin\CandidateBillsMetaBox;
-use GrassrootsSelect\Service;
+use GrassrootsSelect\Services\BillService;
 use GrassrootsSelect\Models\CandidateModel;
 
 function registerMetaBox() {
@@ -8,7 +8,8 @@ function registerMetaBox() {
 }
 
 function renderMetaBox($candidate) {
-  $bills = Service::getBills();
+  $billService = new BillService();
+  $bills = $billService->getBills();
   $votingHistory = get_field(CandidateModel::META_KEY_VOTING_HISTORY, $candidate->ID);
   include(__DIR__ . '/bills_metabox_view.php');
 }

@@ -1,5 +1,4 @@
 <?php
-
 namespace GrassrootsSelect\Models;
 
 class BillModel extends AbstractModel {
@@ -11,17 +10,18 @@ class BillModel extends AbstractModel {
 
   public $govTrackID;
   public $idealVote;
-  public $billNumber;
-  public $billType;
+  public $number;
+  public $type;
   public $congress;
   public $issue;
+  public $govtrackBill;
 
   public function __construct($post) {
     parent::__construct($post);
     $this->govTrackID = get_field(self::META_KEY_GOVTRACK_ID, $this->post->ID);
     $this->idealVote = get_field(self::META_KEY_IDEAL_VOTE, $this->post->ID);
-    $this->billNumber = get_field(self::META_KEY_BILL_NUMBER, $this->post->ID);
-    $this->billType = get_field(self::META_KEY_BILL_TYPE, $this->post->ID);
+    $this->number = get_field(self::META_KEY_BILL_NUMBER, $this->post->ID);
+    $this->type = get_field(self::META_KEY_BILL_TYPE, $this->post->ID);
     $this->congress = get_field(self::META_KEY_CONGRESS_NUMBER, $this->post->ID);
 
     $issues = wp_get_post_terms($this->post->ID, 'issue');
@@ -34,5 +34,13 @@ class BillModel extends AbstractModel {
     } else {
       return $this->issue->name;
     }
+  }
+
+  public function hasGovtrackFields() {
+    return !empty($this->number) && !empty($this->type) && !empty($this->congress);
+  }
+
+  public function setGovtrackBill($govtrackBill) {
+    $this->govtrackBill = $govtrackBill;
   }
 }
