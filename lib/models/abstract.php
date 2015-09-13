@@ -29,4 +29,8 @@ class AbstractModel {
   public function getPermalink() {
     return get_permalink($this->post->ID);
   }
+
+  public function getID() {
+    return $this->post->ID;
+  }
 }

@@ -1,0 +1,5 @@
+{
+    "require": {
+        "scragg0x/govtrack-php": "dev-master"
+    }
+}
