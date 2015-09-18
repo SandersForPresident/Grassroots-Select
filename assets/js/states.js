@@ -6,6 +6,7 @@
         halfHeight = height / 2,
         path = d3.geo.path().projection(null),
         topo = null,
+        stateColors = {};
         svg = d3.select('#map')
           .append('svg')
           .attr('width', width)
@@ -38,13 +39,16 @@
         .attr('class', function (d) {
           return 'district ' + d.id;
         })
-        .attr('fill', function () {
-          var color = Math.floor(Math.random() * 2);
+        .attr('fill', function (d) {
+          var state = d.id.split('-');
+          state = state[0];
+          var color = stateColors[state];
           var random = Math.floor(Math.random() * 5);
           return [colorKey6blue, colorKey6red][color][random];
           return colorKey6blue[random];
         })
         .on('click', function (d) {
+          showTooltip(d);
           zoomToDistrict(this);
         });
     }
@@ -96,9 +100,22 @@
         .attr('transform', 'translate(' + translate + ')scale(' + scale + ')')
     }
 
+    function showTooltip (data) {
+      $('#tooltip').show();
+      $('#tooltip h2 span').text(data.id);
+    }
+
 
     d3.json('/wp-content/themes/GrassrootsSelectTheme/districts2.json', function (error, data) {
       topo = data
+      topo.objects.districts.geometries.forEach(function (item) {
+        var state = item.id.split('-');
+        state = state[0];
+        if (!(state in stateColors)) {
+          stateColors[state] = Math.floor(Math.random() * 2);
+        }
+      });
+      console.log(stateColors);
       buildStates();
       buildDistricts();
     });
