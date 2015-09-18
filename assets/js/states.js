@@ -35,10 +35,19 @@
             .append('title')
             .text(function (d) { return d.id; });
 
-        svg.append('path')
-          .attr('class', 'state-boundaries')
-          .datum(topojson.mesh(us, us.objects.states, function(a, b) { return a !== b; }))
-          .attr('d', path);
+        svg.append('g')
+          .attr('class', 'states')
+          .attr('clip-path', 'url(#clip-land)')
+          .selectAll('path')
+          .data(topojson.feature(us, us.objects.states).features)
+            .enter()
+            .append('path')
+            .attr('d', path);
+
+        // svg.append('path')
+        //   .attr('class', 'state-boundaries')
+        //   .datum(topojson.mesh(us, us.objects.states, function(a, b) { return a !== b; }))
+        //   .attr('d', path);
       });
     });
   }

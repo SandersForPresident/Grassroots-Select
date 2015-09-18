@@ -14,8 +14,11 @@ path {
   stroke-linejoin: round;
   stroke-linecap: round;
 }
-.districts {
-  fill: none;
+.states path {
+  fill: red;
+}
+.states path:hover {
+  fill: yellow;
 }
 .state-boundaries {
   stroke: red;
