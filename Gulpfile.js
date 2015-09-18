@@ -33,6 +33,6 @@ gulp.task('less', function () {
 gulp.task('build', ['js:site', 'js:vendor', 'less']);
 gulp.task('default', ['build']);
 gulp.task('watch', ['default'], function () {
-  gulp.watch(path.scripts.site, ['js:site']);
-  gulp.watch(path.styles.all, ['less']);
+  gulp.watch(paths.scripts.site, ['js:site']);
+  gulp.watch(paths.styles.all, ['less']);
 });
