@@ -2,3 +2,5 @@ node_modules/
 bower_components/
 vendor
 dist/
+us.json
+districts.json
