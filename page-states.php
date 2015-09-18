@@ -23,7 +23,7 @@ path {
 
 .districts {
   fill: none;
-  stroke: transparent;
+  stroke: blue;
   stroke-width: 1px;
 }
 .districts.active path:hover {
@@ -36,6 +36,8 @@ path {
 
 .states path {
   fill: red;
+  stroke: white;
+  stroke-width: 1px;
 }
 .states path:hover {
   fill: yellow;
