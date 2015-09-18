@@ -24,6 +24,20 @@
           .append('use')
           .attr('xlink:href', '#land');
 
+      svg.append('g')
+        .attr('class', 'states')
+        .attr('clip-path', 'url(#clip-land)')
+        .selectAll('path')
+        .data(topojson.feature(us, us.objects.states).features)
+          .enter()
+          .append('path')
+          .attr('d', path)
+          .on('click', function (d, i, e) {
+            d3.select('.states').classed('active', true);
+            d3.select('.districts').classed('active', true);
+            d3.select(this).classed('active', true);
+          })
+
         svg.append('g')
           .attr('class', 'districts')
           .attr('clip-path', 'url(#clip-land)')
@@ -34,15 +48,6 @@
             .attr('d', path)
             .append('title')
             .text(function (d) { return d.id; });
-
-        svg.append('g')
-          .attr('class', 'states')
-          .attr('clip-path', 'url(#clip-land)')
-          .selectAll('path')
-          .data(topojson.feature(us, us.objects.states).features)
-            .enter()
-            .append('path')
-            .attr('d', path);
 
         // svg.append('path')
         //   .attr('class', 'state-boundaries')

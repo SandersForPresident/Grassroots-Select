@@ -14,6 +14,26 @@ path {
   stroke-linejoin: round;
   stroke-linecap: round;
 }
+.states.active path {
+  visibility: hidden;
+}
+.states.active path.active {
+  visibility: visible;
+}
+
+.districts {
+  fill: none;
+  stroke: transparent;
+  stroke-width: 1px;
+}
+.districts.active path:hover {
+  fill: black;
+}
+
+.districts.active {
+  stroke: white;
+}
+
 .states path {
   fill: red;
 }
