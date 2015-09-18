@@ -1,10 +1,10 @@
 var gulp = require('gulp'),
     less = require('gulp-less'),
     concat = require('gulp-concat'),
-    paths: {
+    paths = {
       scripts: {
         site: 'assets/js/**/*.js',
-        vendor: []
+        vendor: ['bower_components/d3/d3.js']
       },
       styles: {
         main: 'assets/less/main.less',
@@ -31,7 +31,7 @@ gulp.task('less', function () {
 });
 
 gulp.task('build', ['js:site', 'js:vendor', 'less']);
-gulp.task('default', 'build');
+gulp.task('default', ['build']);
 gulp.task('watch', ['default'], function () {
   gulp.watch(path.scripts.site, ['js:site']);
   gulp.watch(path.styles.all, ['less']);

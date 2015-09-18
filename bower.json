@@ -5,5 +5,8 @@
     "Atticus White <contact@atticuswhite.com>"
   ],
   "license": "AGPL",
-  "homepage": "https://github.com/SandersForPresident/Grassroots-Select"
+  "homepage": "https://github.com/SandersForPresident/Grassroots-Select",
+  "dependencies": {
+    "d3": "~3.5.6"
+  }
 }
