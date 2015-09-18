@@ -14,7 +14,9 @@
           .attr('preserveAspetRatio', 'xMidYMin'),
         districtFeatures = svg.append('g').classed('districts', true),
         stateFeatures = svg.append('g').classed('states', true),
-        zoom = d3.behavior.zoom();
+        zoom = d3.behavior.zoom(),
+        colorKey6blue = ['rgb(199,233,180)','rgb(127,205,187)','rgb(65,182,196)','rgb(29,145,192)','rgb(34,94,168)','rgb(12,44,132)'],
+        colorKey6red = ["rgb(255,213,125)","rgb(255,184,97)","rgb(255,138,72)","rgb(254,80,54)","rgb(228,38,41)","rgb(165,24,42)"];
 
     svg.call(zoom).on('dblclick.zoom', null);
 
@@ -35,6 +37,12 @@
         .attr('d', path)
         .attr('class', function (d) {
           return 'district ' + d.id;
+        })
+        .attr('fill', function () {
+          var color = Math.floor(Math.random() * 2);
+          var random = Math.floor(Math.random() * 5);
+          return [colorKey6blue, colorKey6red][color][random];
+          return colorKey6blue[random];
         })
         .on('click', function (d) {
           zoomToDistrict(this);

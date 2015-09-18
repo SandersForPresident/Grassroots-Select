@@ -27,7 +27,7 @@ svg.active .states path.active {
   stroke-width: 0.5px;
 }
 .district.selected {
-  fill: red;
+  fill: rgb(255,213,125);
 }
 
 .state-border {
