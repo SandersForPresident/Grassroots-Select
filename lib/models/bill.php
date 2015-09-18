@@ -43,4 +43,8 @@ class BillModel extends AbstractModel {
   public function setGovtrackBill($govtrackBill) {
     $this->govtrackBill = $govtrackBill;
   }
+
+  public function hasGovtrackModel() {
+    return !empty($this->govtrackBill);
+  }
 }

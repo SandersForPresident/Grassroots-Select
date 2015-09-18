@@ -15,7 +15,13 @@ function hasVoteForBill ($votingHistory, $bill) {
   <tbody>
     <?php foreach ($bills as $bill): ?>
     <tr>
-      <td><?php echo $bill->getTitle(); ?></td>
+      <td>
+        <?php if ($bill->hasGovtrackModel()): ?>
+          <a href="<?php echo $bill->govtrackBill['link']; ?>" target="_blank"><?php echo $bill->getTitle(); ?></a>
+        <?php else: ?>
+          <?php echo $bill->getTitle(); ?>
+        <?php endif; ?>
+      </td>
       <td><?php echo $bill->getIssueTitle(); ?></td>
       <td>
         <select name="bill[<?php echo $bill->getID(); ?>]">
