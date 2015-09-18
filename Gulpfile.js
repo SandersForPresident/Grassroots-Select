@@ -4,7 +4,10 @@ var gulp = require('gulp'),
     paths = {
       scripts: {
         site: 'assets/js/**/*.js',
-        vendor: ['bower_components/d3/d3.js']
+        vendor: [
+          'bower_components/d3/d3.js',
+          'bower_components/topojson/topojson.js'
+        ]
       },
       styles: {
         main: 'assets/less/main.less',

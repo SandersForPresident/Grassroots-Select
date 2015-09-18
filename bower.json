@@ -7,6 +7,7 @@
   "license": "AGPL",
   "homepage": "https://github.com/SandersForPresident/Grassroots-Select",
   "dependencies": {
-    "d3": "~3.5.6"
+    "d3": "~3.5.6",
+    "topojson": "~1.6.19"
   }
 }

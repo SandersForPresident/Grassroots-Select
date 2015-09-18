@@ -8,44 +8,32 @@
   ));
 ?>
 
-<div id="map" style="width: 100%; height: 600px;"></div>
+<div id="map" style="width: 1200px; height: 800px;"></div>
 <style type="text/css">
 path {
   stroke-linejoin: round;
   stroke-linecap: round;
 }
-.states.active path {
+svg.active .states path {
   visibility: hidden;
 }
-.states.active path.active {
+svg.active .states path.active {
   visibility: visible;
 }
 
 .districts {
-  fill: none;
-  stroke: blue;
-  stroke-width: 1px;
-}
-.districts.active path:hover {
-  fill: black;
-}
-
-.districts.active {
+  fill: blue;
   stroke: white;
+  stroke-width: 0.5px;
 }
-
-.states path {
+.district.selected {
   fill: red;
+}
+
+.state-border {
   stroke: white;
   stroke-width: 1px;
-}
-.states path:hover {
-  fill: yellow;
-}
-.state-boundaries {
-  stroke: red;
-  stroke-width: 2px;
-  fill: orange;
+  fill: none;
 }
 </style>
 
@@ -54,6 +42,5 @@ path {
     <h2><a href="<?php echo get_term_link($term); ?>"><?php echo $term->name; ?></a></h2>
   </div>
 <?php endforeach; ?>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/topojson/1.6.19/topojson.min.js"></script>
 
 <?php get_footer(); ?>
