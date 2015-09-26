@@ -8,7 +8,7 @@
   ));
 ?>
 
-<div id="tooltip">
+<div id="infowindow">
   <h2>District Name: <span></span></h2>
   <br/>
   <h4>Candidate Name</h4>
@@ -26,11 +26,14 @@
     Some information about the candidate
   </p>
 </div>
-<div id="map" style="width: 1200px; height: 800px;"></div>
+<div id="tooltip">
+  District Name: <span></span>
+</div>
+<div id="map" style="width: 100%; height: 800px;"></div>
 
 
 <style type="text/css">
-#tooltip {
+#infowindow {
   position: absolute;
   display: none;
   top: 20px;
@@ -43,10 +46,22 @@
   box-shadow: 0px 0px 18px 0px rgba(0,0,0,0.75);
   display: none;
 }
+#tooltip {
+  position: absolute;
+  display: none;
+  padding: 5px;
+  background-color: white;
+  border-radius: 2px;
+  box-shadow: 0 2px 0 0 rgba(0,0,0,0.3);
+  font-size: 14px;
+}
 
 path {
   stroke-linejoin: round;
   stroke-linecap: round;
+}
+svg {
+  cursor: pointer;
 }
 svg.active .states path {
   visibility: hidden;

@@ -47,8 +47,14 @@
           return [colorKey6blue, colorKey6red][color][random];
           return colorKey6blue[random];
         })
+        .on('mouseout', function () {
+          hideTooltip();
+        })
+        .on('mousemove', function (d) {
+          showTooltip(d, d3.event);
+        })
         .on('click', function (d) {
-          showTooltip(d);
+          showInfoWindow(d);
           zoomToDistrict(this);
         });
     }
@@ -100,9 +106,19 @@
         .attr('transform', 'translate(' + translate + ')scale(' + scale + ')')
     }
 
-    function showTooltip (data) {
+    function showInfoWindow (data) {
+      $('#infowindow').show();
+      $('#infowindow h2 span').text(data.id);
+    }
+
+    function showTooltip (data, event) {
       $('#tooltip').show();
-      $('#tooltip h2 span').text(data.id);
+      $('#tooltip span').text(data.id);
+      $('#tooltip').css({top: event.pageY + 20, left: event.pageX - 10});
+    }
+
+    function hideTooltip () {
+      $('#tooltip').hide();
     }
 
 
