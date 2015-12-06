@@ -1,4 +1,95 @@
 (function ($, d3) {
+  var path = d3.geo.path().projection(null),
+      colorKey6blue = [
+        'rgb(199,233,180)',
+        'rgb(127,205,187)',
+        'rgb(65,182,196)',
+        'rgb(29,145,192)',
+        'rgb(34,94,168)',
+        'rgb(12,44,132)'
+      ],
+      colorKey6red = [
+        'rgb(255,213,125)',
+        'rgb(255,184,97)',
+        'rgb(255,138,72)',
+        'rgb(254,80,54)',
+        'rgb(228,38,41)',
+        'rgb(165,24,42)'
+      ];
+
+  function Map ($target) {
+    this.width = $target.width();
+    this.height = $target.height();
+    this.stateColors = {};
+    this.svg = buildMap();
+    this.states = buildStates(svg);
+    this.districts = buildDistricts(svg);
+    d3.json('/wp-content/themes/GrassrootsSelectTheme/districts2.json', this.onDataLoaded.bind(this));
+  }
+
+  Map.prototype.onDataLoaded = function (error, data) {
+    if (error) {
+      throw new Error(error);
+    }
+    data.objects.districts.geometries.forEach(function (item) {
+      var state = item.id.split('-');
+      state = state[0];
+      if (!(state in this.stateColors)) {
+        this.stateColors[state] = Math.floor(Math.random() * 2);
+      }
+    }.bind(this));
+
+    this.buildStates();
+    this.buildDistricts();
+    // this.states = buildStates(this.svg, data);
+    // this.districts = buildDistricts
+  };
+
+  Map.prototype.onDistrictMouseMove = function () {
+
+  };
+
+  Map.prototype.onDistrictMouseOut = function () {
+
+  };
+
+  Map.prototype.onDistrictClick = function () {
+  };
+
+  function buildMap (element, width, height) {
+    return d3.select(element)
+      .append('svg')
+      .attr('width', width)
+      .attr('height', height)
+      .attr('viewBox', [85, 5, width, height].join(' '))
+      .attr('preserveAspetRatio', 'xMidYMin');
+  }
+
+  function buildStates (svg, data) {
+    return svg.append('g')
+      .classed('states', true)
+      .selectAll('path')
+      .data(topojson.feature(data, data.objects.states).features)
+      .enter()
+      .append('path')
+      .attr('d', path)
+      .attr('class', 'state-border');
+  }
+
+  function buildDistricts(svg, data) {
+    return svg.append('g')
+      .classed('districts', true)
+      .selectAll('path')
+      .data(topojson.feature(data, data.objects.districts).features)
+      .enter()
+      .append('path')
+      .attr('d', path)
+      .attr('class', function (d) {
+        return 'district ' + d.id;
+      });
+  }
+
+
   function Map ($target) {
     var width = $target.width(),
         height = $target.height(),
