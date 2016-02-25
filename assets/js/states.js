@@ -24,7 +24,7 @@
     this.svg = buildMap();
     this.states = buildStates(svg);
     this.districts = buildDistricts(svg);
-    d3.json('/wp-content/themes/GrassrootsSelectTheme/districts2.json', this.onDataLoaded.bind(this));
+    d3.json('/wp-content/themes/GrassrootsSelectTheme/districts.json', this.onDataLoaded.bind(this));
   }
 
   Map.prototype.onDataLoaded = function (error, data) {
