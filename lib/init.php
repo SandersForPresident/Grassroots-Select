@@ -128,6 +128,8 @@ add_filter('post_type_link', __NAMESPACE__ . '\\show_permalinks', 1, 2);
 
 function enqueue_scripts() {
   wp_enqueue_script('vendor', get_template_directory_uri() . '/dist/vendor.js', array('jquery'), '1.0.0', true);
+  wp_enqueue_style('vfb_vendor_css', get_template_directory_uri() . "/dist/vendor.css");
   wp_enqueue_script('site', get_template_directory_uri() . '/dist/site.js', array('vendor'), '1.0.0', true);
+  wp_enqueue_style('vfb_site_css', get_template_directory_uri() . "/dist/main.css");
 }
 add_action('wp_enqueue_scripts', __NAMESPACE__ . '\\enqueue_scripts');
