@@ -1,6 +1,8 @@
 var gulp = require('gulp'),
-    less = require('gulp-less'),
+    sass = require('gulp-sass'),
     concat = require('gulp-concat'),
+    imagemin = require('gulp-imagemin'),
+    pngquant = require('imagemin-pngquant'),
     paths = {
       scripts: {
         site: 'assets/js/**/*.js',
@@ -10,8 +12,8 @@ var gulp = require('gulp'),
         ]
       },
       styles: {
-        main: 'assets/less/main.less',
-        all: 'assets/less/**/*.less'
+        main: 'assets/scss/main.scss',
+        all: 'assets/scss/**/*.scss'
       }
     };
 
@@ -27,15 +29,25 @@ gulp.task('js:site', function () {
   .pipe(gulp.dest('dist/'));
 });
 
-gulp.task('less', function () {
+gulp.task('sass', function () {
   gulp.src(paths.styles.main)
-  .pipe(less())
+  .pipe(sass())
   .pipe(gulp.dest('dist/'));
 });
 
-gulp.task('build', ['js:site', 'js:vendor', 'less']);
+gulp.task('images', function () {
+  gulp.src('assets/images/**/*')
+  .pipe(imagemin({
+    progressive: true,
+    use: [pngquant()]
+  }))
+  .pipe(gulp.dest('dist/images'));
+});
+
+gulp.task('build', ['js:site', 'js:vendor', 'sass', 'images']);
 gulp.task('default', ['build']);
 gulp.task('watch', ['default'], function () {
   gulp.watch(paths.scripts.site, ['js:site']);
-  gulp.watch(paths.styles.all, ['less']);
+  gulp.watch(paths.styles.all, ['sass']);
+  gulp.watch('assets/images/**/*', ['images']);
 });
