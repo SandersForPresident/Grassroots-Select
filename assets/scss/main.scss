@@ -1,0 +1,24 @@
+.coming-soon {
+  padding: 20px 0;
+  text-align: center;
+  .coming-soon-content {
+    display: inline-block;
+  }
+  .header {
+    background: url(images/launch/coming-soon.png) no-repeat 0 0;
+    height: 288px;
+    text-indent: -999em;
+    width: 305px;
+  }
+  .newsletter {
+    margin-top: 30px;
+    .submit {
+      border-top-left-radius: 0;
+      border-top-right-radius: 0;
+      display: block;
+      font-weight: bold;
+      padding: 15px 0;
+      width: 100%;
+    }
+  }
+}
